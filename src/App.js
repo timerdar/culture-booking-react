@@ -1,9 +1,17 @@
-import EventList from "./components/EventList";
+import EventList from "./components/public/events/EventList";
+import EventAdd from "./components/admin/EventAdd";
+import React from "react";
+import { BrowserRouter, Route, Routes} from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <EventList/>
+    <div>
+      <BrowserRouter>
+      <Routes>
+        <Route exact path="/events" element={<EventList/>}/>
+        <Route path="/admin/events/add" element={<EventAdd/>}/>
+      </Routes>
+      </BrowserRouter>
     </div>
   );
 }
