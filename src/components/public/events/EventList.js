@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function EventList() {
 
@@ -9,7 +10,7 @@ function EventList() {
         fetch("/api/events")
             .then((response) => {
                 if (!response.ok){
-                    console.error(`Error. Code: ${response.status}`);
+                    throw new Error(`Server error: ${response.st}`)    
                 }
                 return response.json();
             })
@@ -30,7 +31,7 @@ function EventList() {
             <h1>Мероприятия</h1>
             <ul>
                 {events.map((event) => (
-                    <li key={event.id}>{event.name} - {event.eventDate}</li>
+                    <li key={event.id}><Link to={`/events/${event.id}`}>{event.name} - {event.eventDate}</Link></li>
                 ))}
             </ul>
         </div>
