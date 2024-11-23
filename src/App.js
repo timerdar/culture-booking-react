@@ -4,6 +4,8 @@ import EventAdd from "./components/admin/EventAdd";
 import VisitorAdd from "./components/public/visitors/VisitorAdd";
 import React from "react";
 import { BrowserRouter, Route, Routes, Navigate} from "react-router-dom";
+import TicketView from "./components/public/tickets/TicketView";
+import SeatsList from "./components/public/events/SeatsList_STUB";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
           <Route path="/admin/events/add" element={<EventAdd/>}/>
           <Route path="/events/:id" element={<SelectedEvent/>}/>
           <Route path="/events/:id/registration/" element={<VisitorAdd/>}/>
+          <Route path="/events/:id/seats" element={<SeatsList/>}/>
+          <Route path="/tickets/:uuid" element={<TicketView/>}/>
         </Routes>
       </BrowserRouter>
     </div>

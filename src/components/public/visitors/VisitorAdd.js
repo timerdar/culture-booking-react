@@ -9,7 +9,9 @@ function VisitorAdd(){
     const [surname, setSurname] = useState('')
     const [fathername, setFathername] = useState('')
     const [category, setCategory] = useState('')
-    var userId;
+    const [userId, setUserId] = useState();
+
+    document.title = "Регистрация";
 
     function addVisitor(name, surname, fathername, category){
         fetch(`/api/visitors`,
@@ -32,14 +34,18 @@ function VisitorAdd(){
             if(!response.ok){
                 throw new Error(`Error! Status: ${response.status}`)
             }
-            userId = response.json().id;
-            navigate(`/events/${id}/seats`, {state: {userId}});
+            return response.json();
+        })
+        .then((data) => {
+            setUserId(data.id);
+            console.log(data);
+            navigate(`/events/${id}/seats`, {state: {userId: data.id}});
         })
     }
 
     function handleSubmit(event) {
         event.preventDefault();
-        addVisitor(name, surname, fathername, category)
+        addVisitor(name, surname, fathername, category);
     }
 
     useEffect( () => {
@@ -67,17 +73,6 @@ function VisitorAdd(){
         <div>
             <h1>Введите свои данные</h1>
             <form onSubmit={handleSubmit}>
-            <div>
-                    <label>Имя</label>
-                    <input 
-                        type="text"
-                        id="add-consumer-name"
-                        name="name"
-                        autoComplete="off"
-                        value={name}
-                        onChange={(event) => {setName(event.target.value)}}
-                    />
-                </div>
                 <div>
                     <label>Фамилия</label>
                     <input 
@@ -87,6 +82,17 @@ function VisitorAdd(){
                         autoComplete="off"
                         value={surname}
                         onChange={(event) => {setSurname(event.target.value)}}
+                    />
+                </div>
+                <div>
+                    <label>Имя</label>
+                    <input 
+                        type="text"
+                        id="add-consumer-name"
+                        name="name"
+                        autoComplete="off"
+                        value={name}
+                        onChange={(event) => {setName(event.target.value)}}
                     />
                 </div>
                 <div>

@@ -1,12 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function EventAdd(){
 
+    const { navigate } = useNavigate();
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [eventDate, setEventDate] = useState('')
     const [seats, setSeats] = useState('')
     const [id, setId] = useState(0)
+
+    document.title = 'Создание мероприятия'
 
     function addEventToApi(name, description, eventDate, seats){
         fetch("/api/events", {
@@ -20,7 +24,7 @@ function EventAdd(){
                 'description':description,
                 'eventDate':eventDate,
                 'seats':
-                    {"IT": seats}
+                    {seats}
                 })
         })
         .then((response) => {
@@ -32,7 +36,7 @@ function EventAdd(){
         .then((data) => {
             console.log('Event created: ', data);
             setId(data.id);
-            window.location.assign(`/events`);
+            navigate(`/events`);
         })
         .catch((err) => {
             console.error('Error creating event:', err.message);
@@ -82,7 +86,7 @@ function EventAdd(){
                     />
                 </div>
                 <div>
-                    <label>Распределение мест</label>
+                    <label>Распределение мест (COMMIGN SOON)</label>
                     <input 
                         type="text"
                         id="add-new-event-seats"

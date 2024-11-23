@@ -19,6 +19,7 @@ function SelectedEvent(){
         .then((data) => {
             setEvent(data);
             setLoading(false);
+            document.title = data.name;
         })
         .catch((err) => {
             return <h2>Ошибка загрузки мероприятия: {err}</h2>

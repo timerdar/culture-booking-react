@@ -6,6 +6,8 @@ function EventList() {
     const [events, setEvents] = useState([])
     const [loading, setLoading] = useState(true)
 
+    document.title = "Мероприятия";
+
     useEffect(() => {
         fetch("/api/events")
             .then((response) => {
@@ -24,7 +26,7 @@ function EventList() {
     }, []);
 
 
-    if(loading) return <p>loading...</p>;
+    if(loading) return <p>Загрузка...</p>;
 
     return (
         <div>
