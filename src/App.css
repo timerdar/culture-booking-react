@@ -1,0 +1,347 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+* {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-size: 24px;
+}
+
+@media only screen and (max-width: 700px) {
+    html, body {
+        margin: 0;
+        padding: 0;
+        font-size: 18px;
+    }
+}
+
+/* FORM */
+
+.container .form-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 255, 136, 0.5);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+}
+
+.form-container h1{
+    text-align: center;
+    margin: 0 0 30px;
+    padding: 0;
+    color: #000000;
+}
+
+.form-container col-input {
+    position: relative;
+}
+
+.col-input input, .col-textarea textarea{
+    width: 100%;
+    padding: 10px 0;
+    font-size: 30px;
+    color: #000000;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #000000;
+    outline: none;
+    background: transparent;
+}
+
+.row label {
+    color: #000000;
+}
+
+.form-container .form-button{
+    position: relative;
+    border: none;
+    width: 50%;
+    padding: 20px;
+    font-size: 20px;
+    left: 25%;
+    margin-top: 20px;
+    background-color: #000000;
+    color: rgb(0, 255, 136);
+    border-radius: 10px;
+}
+
+::placeholder {
+        padding-left: 4px;
+        color: rgb(104, 104, 104);
+    }
+
+.row-radio{
+    margin-top: 16px;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.row-radio label{
+    color: #000000;
+}
+
+.input-radio{
+    margin-top: 16px;
+}
+
+@media only screen and (max-width: 700px) {
+    .row-radio {
+      flex-direction: column;
+    }
+    .form-container {
+        width: 350px;
+    }
+    ::placeholder {
+        color: rgb(104, 104, 104);
+    }
+    .form-container h1{
+        font-size: 38px;
+    }
+ }
+
+
+/*TICKET CSS*/
+
+.ticket-main{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 255, 136, 0.5);
+    border-radius: 30px;
+    padding: 20px;
+}
+
+.ticket-row{
+    flex-direction: row;
+}
+
+.ticket-row label{
+    color: #000000;
+}
+
+.ticket-row span{
+    color: #000000;
+    font-weight: 700;
+}
+
+.qr-code-img{
+    
+    width: 300px;    
+}
+
+@media only screen and (max-width: 700px) {
+    .ticket-main{
+        width: 350px;
+    }
+ }
+
+
+/* EVENTS TABLE */
+
+.events-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    border-radius: 30px;
+    padding: 20px;
+}
+
+.events-container h1{
+    text-align: center;
+    font-weight: 700;
+}
+
+.events-table th {
+    text-align: left;
+    font-weight: 600;
+    background-color: #000000;
+    color: rgba(0, 255, 136, 0.5);
+    border-collapse: collapse;
+    vertical-align: middle;
+}
+
+.events-table tr{
+    background-color: rgba(0, 255, 136, 0.5);
+    color:rgba(0, 0, 0);
+}
+
+.events-table tr:hover{
+    background-color: rgba(0, 122, 65, 0.5);
+    cursor: pointer;
+}
+
+
+.events-table,
+.events-table th,
+.events-table td,
+.events-table tr {
+    border: none;
+    border-collapse: collapse;
+    padding: 16px;
+}
+
+
+@media only screen and (max-width: 700px) {
+    .events-table{
+        font-size: 16px;
+    }
+}
+
+/* SELECT SEATS */
+
+.select-seat-container .seats-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1000px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    border-radius: 30px;
+    padding: 20px;
+}
+
+.select-seat-container .seats-container h1 {
+    text-align: center;
+}
+
+.seats-table {
+    border-collapse: separate;
+    border-spacing: 3px;
+}
+
+.seat,
+.nonseat {
+    border-radius: 5px;
+    color: transparent;
+    width: 50px;
+    height: 30px;
+}
+
+.seat:hover{
+    cursor: pointer;
+    transform: scale(1.1); 
+}
+
+.seat {
+    position: relative;
+    background-color:rgb(148, 148, 148);
+}
+
+.nonseat {
+    background-color: transparent;
+}
+
+.empty {
+    text-align: center;
+}
+
+.tooltip {
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 20px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    white-space: nowrap;
+    z-index: 1;
+  }
+  
+  .seat:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+    bottom: 150%;
+    left: -250%;
+    transform: translateY(-10px);
+  }
+
+@media only screen and (max-width: 700px) {
+    .seats-container{
+        width: 90%;
+        padding: 20px;
+        top: 10%;
+        left: 50%;
+        transform: translate(-50%, 0);
+        padding: 10px;
+        overflow-x: auto;
+    }
+    .seats-table {
+        width: 100%;
+        border-spacing: 2px;
+    }
+    .seat,
+    .nonseat {
+        border-radius: 5px;
+        color: transparent;
+        width: 25px;
+        height: 25px;
+    }
+
+    .tooltip {
+        font-size: 0.7rem;
+        padding: 3px;
+    }
+}
+
+
+/* EVENT ADD */
+
+.create-event-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.create-event-container .seats-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1000px;
+    padding: 40px;
+    transform: translate(0, -60%);
+    display: flex;
+    flex-direction: column;
+    border-radius: 30px;
+    padding: 20px;
+}
+
+.create-event-container .seats-container h1{
+    visibility: hidden;
+}
+
+.create-event-container .form-container{
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    width: 600px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 255, 136, 0.5);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+}

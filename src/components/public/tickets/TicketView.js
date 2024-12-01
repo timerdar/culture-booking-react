@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Utils from "../../../Utils";
 
 function TicketView(){
 
@@ -44,22 +45,25 @@ function TicketView(){
             alert(err);
         })
 
-    }, [uuid])
+    }, [])
 
     if(loading) return <div>Loading</div>
 
     return (
-        <div>
-            <div>
-                <label>Посетитель: {`${ticket.visitor.surname} ${ticket.visitor.name} ${ticket.visitor.fathername}`}</label>
+        <div class="ticket-main">
+            <div class="ticket-row">
+                <label>Посетитель: <span>{`${ticket.visitor.surname} ${ticket.visitor.name} ${ticket.visitor.fathername}`}</span></label>
             </div>
-            <div>
-                <label>Мероприятие: {`${ticket.event.name}`}</label>
+            <div class="ticket-row">
+                <label>Мероприятие: <span>{`${ticket.event.name}`}</span></label>
             </div>
-            <div>
-                <label>Дата: {`${ticket.event.eventDate}`}</label>
+            <div class="ticket-row">
+                <label>Дата: <span>{`${Utils.formatDate(ticket.event.eventDate)}`}</span></label>
             </div>
-            <img src={qr} alt="ticket_qr"/>
+            <div class="ticket-row">
+                <label>Место: <span>{`${ticket.seat}`}</span></label>
+            </div>
+            <img class="qr-code-img" src={qr} alt="ticket_qr"/>
         </div>
     );
 }

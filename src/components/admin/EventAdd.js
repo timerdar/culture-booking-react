@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import '../../App.css';
+import SeatsPicker from "../seatsLogic/SeatsPicker";
 
 function EventAdd(){
 
     const { navigate } = useNavigate();
-    const [name, setName] = useState("")
-    const [description, setDescription] = useState("")
+    const [name, setName] = useState('')
+    const [description, setDescription] = useState('')
     const [eventDate, setEventDate] = useState('')
     const [seats, setSeats] = useState('')
     const [id, setId] = useState(0)
+    const [groups, setGroups] = useState([])
 
     document.title = 'Создание мероприятия'
 
@@ -45,61 +48,55 @@ function EventAdd(){
 
     function handleSubmit(event){
         event.preventDefault();
-        addEventToApi(name, description, eventDate, seats);
+        console.log(description)
+        //addEventToApi(name, description, eventDate, seats);
     }
 
     return (
-        <div className="add-new-event">
-            <h1>Создание мероприятия</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Название мероприятия</label>
+        <div class="create-event-container">
+            <form class="form-container" onSubmit={handleSubmit}>
+                <h1>Создание мероприятия</h1>
+                <div class="col-input">
                     <input 
+                        placeholder="Название мероприятия"
                         type="text"
                         id="add-new-event-name"
                         name="name"
                         autoComplete="off"
                         value={name}
+                        required
                         onChange={(event) => {setName(event.target.value)}}
                     />
                 </div>
-                <div>
-                    <label>Описание</label>
-                    <input 
-                        type="text"
-                        id="add-new-event-description"
-                        name="description"
-                        autoComplete="off"
-                        value={description}
-                        onChange={(event) => {setDescription(event.target.value)}}
+                <div class="col-textarea">
+                    <textarea 
+                    id="add-new-event-desctiption"
+                    name="description"
+                    placeholder="Описание"
+                    rows={5}
+                    cols={25}
+                    autoComplete="off"
+                    required
+                    onChange={(event) => {setDescription(event.target.value)}}
                     />
                 </div>
-                <div>
-                <label>Дата</label>
+                <div class="col-input">
                 <input 
-                        type="text"
+                        type="datetime-local"
                         id="add-new-event-date"
                         name="eventDate"
+                        required
                         autoComplete="off"
                         value={eventDate}
                         onChange={(event) => {setEventDate(event.target.value)}}
                     />
                 </div>
-                <div>
-                    <label>Распределение мест (COMMIGN SOON)</label>
-                    <input 
-                        type="text"
-                        id="add-new-event-seats"
-                        name="seats"
-                        autoComplete="off"
-                        value={seats}
-                        onChange={(event) => {setSeats(event.target.value)}}
-                    />
-                </div>
-                <button type="submit">
+                <button class="form-button" type="submit">
                     Добавить
                 </button>
             </form>
+            
+            <SeatsPicker/>
         </div>
             
     )

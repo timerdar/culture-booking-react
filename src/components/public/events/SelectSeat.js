@@ -1,14 +1,19 @@
-import { useState } from "react";
+import SeatsPicker from "../../seatsLogic/SeatsPicker";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-
-function SeatsList(){
-    const [seat, setSeat]  = useState();
+function SelectSeat(){
     const location = useLocation();
     const visitor_id = location.state;
     const event_id = useParams();
     const navigate = useNavigate();
-    
+
+    document.title = 'Выбор места'
+
+    const handelSeatClick = (index, row) => {
+
+        createTicket(parseInt(visitor_id.userId), parseInt(event_id.id), `${index}-${row}`)
+    }
+
     function createTicket(visitor_id, event_id, seat){
         fetch('/api/tickets', 
             {
@@ -37,28 +42,10 @@ function SeatsList(){
         })
     }
 
-    function handleSubmit(event){
-        event.preventDefault();
-        createTicket(parseInt(visitor_id.userId), parseInt(event_id.id), seat);
-    }
 
-    return (
-        <div>
-            <h1>Выберите место</h1>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    id="select-seat"
-                    name="seat"
-                    autoComplete="off"
-                    value={seat}
-                    required
-                    onChange={(event) => {setSeat(event.target.value)}}
-                />
-                <button type="submit">Получить билет</button>
-            </form>
-        </div>
-    );
-};
+    return (<div class="select-seat-container">
+        <SeatsPicker handelSeatClick={handelSeatClick}/>
+    </div>);
+}
 
-export default SeatsList;
+export default SelectSeat;

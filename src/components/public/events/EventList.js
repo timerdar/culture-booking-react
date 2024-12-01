@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
+import '../../../App.css';
+import Utils from "../../../Utils";
 
 function EventList() {
 
+    const navigate = useNavigate()
     const [events, setEvents] = useState([])
     const [loading, setLoading] = useState(true)
 
@@ -29,13 +32,25 @@ function EventList() {
     if(loading) return <p>Загрузка...</p>;
 
     return (
-        <div>
+        <div class="events-container">
             <h1>Мероприятия</h1>
-            <ul>
-                {events.map((event) => (
-                    <li key={event.id}><Link to={`/events/${event.id}`}>{event.name} - {event.eventDate}</Link></li>
-                ))}
-            </ul>
+            <p>Ниже представлен список мероприятий, на которые можно записаться. Для регистрации выберите мероприятие.</p>
+            <table class="events-table">
+                <thead>
+                    <tr>
+                        <th>Название мероприятия</th>
+                        <th>Дата и время проведения</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {events.map((event) => (
+                        <tr onClick={()=> navigate(`/events/${event.id}`)}>
+                            <td class="event-name">{event.name}</td>
+                            <td class="event-date">{Utils.formatDate(event.eventDate)}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     )
 }

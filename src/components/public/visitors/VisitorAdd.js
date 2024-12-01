@@ -1,5 +1,6 @@
 import { useEffect, useState} from "react";
 import { useNavigate, useParams  } from "react-router-dom";
+import '../../../App.css';
 
 function VisitorAdd(){
     const navigate = useNavigate(); 
@@ -66,60 +67,76 @@ function VisitorAdd(){
         .catch((err) => {
             alert(err);
         })
-    }, [id]);
+    }, []);
         
 
     return (
-        <div>
-            <h1>Введите свои данные</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Фамилия</label>
-                    <input 
-                        type="text"
-                        id="add-consumer-surname"
-                        name="surname"
-                        autoComplete="off"
-                        value={surname}
-                        onChange={(event) => {setSurname(event.target.value)}}
-                    />
+        <div class="container">
+            <form onSubmit={handleSubmit} class="form-container">
+                <h1>Введите свои данные</h1>
+                <div class="row">
+                    <div class="col-input">
+                        <input 
+                            type="text"
+                            id="add-consumer-surname"
+                            name="surname"
+                            autoComplete="off"
+                            required
+                            placeholder="Фамилия"
+                            value={surname}
+                            onChange={(event) => {setSurname(event.target.value)}}
+                        />
+                    </div>
                 </div>
-                <div>
-                    <label>Имя</label>
-                    <input 
-                        type="text"
-                        id="add-consumer-name"
-                        name="name"
-                        autoComplete="off"
-                        value={name}
-                        onChange={(event) => {setName(event.target.value)}}
-                    />
+                <div class="row">
+                    <div class="col-input">
+                        <input 
+                            type="text"
+                            id="add-consumer-name"
+                            name="name"
+                            autoComplete="off"
+                            required
+                            placeholder="Имя"
+                            value={name}
+                            onChange={(event) => {setName(event.target.value)}}
+                        />
+                    </div>
                 </div>
-                <div>
-                <label>Отчество</label>
-                <input 
-                        type="text"
-                        id="add-consumer-fathername"
-                        name="fatherName"
-                        autoComplete="off"
-                        value={fathername}
-                        onChange={(event) => {setFathername(event.target.value)}}
-                    />
+                <div class="row">
+                    <div class="col-input">
+                        <input
+                            type="text"
+                            id="add-consumer-fathername"
+                            name="fatherName"
+                            autoComplete="off"
+                            required
+                            placeholder="Отчество"
+                            value={fathername}
+                            onChange={(event) => {setFathername(event.target.value)}}
+                        />
+                    </div>
                 </div>
-                <div>
+                <div class="row">
+                    <label>
+                        Выберите сектор:
+                    </label>
+                </div>
+                <div class="row-radio">
                     {categories.map((cat, index) => (
-                        <div key={index}>
-                            <input 
-                                type="radio"
-                                name="category"
-                                value={cat}
-                                onChange={(event) => setCategory(event.target.value)}
-                            />
-                            <label>{cat}</label>
+                        <div key={index} class="input-radio-row">
+                            <div class="input-radio">
+                                <input 
+                                    type="radio"
+                                    name="category"
+                                    value={cat}
+                                    onChange={(event) => setCategory(event.target.value)}
+                                />
+                                <label>{cat}</label>
+                            </div>
                         </div>
                     ))}
                 </div>
-                <button type="submit">
+                <button class="form-button" type="submit">
                     Выбрать место
                 </button>
             </form>
