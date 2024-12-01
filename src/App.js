@@ -6,6 +6,8 @@ import React from "react";
 import { BrowserRouter, Route, Routes, Navigate} from "react-router-dom";
 import TicketView from "./components/public/tickets/TicketView";
 import SelectSeat from "./components/public/events/SelectSeat";
+import CategoriesTable from "./components/seatsLogic/CategoriesTable";
+import EditableTable from "./components/seatsLogic/TestTable";
 
 
 function App() {
@@ -20,6 +22,7 @@ function App() {
           <Route path="/events/:id/registration/" element={<VisitorAdd/>}/>
           <Route path="/events/:id/seats" element={<SelectSeat/>}/>
           <Route path="/tickets/:uuid" element={<TicketView/>}/>
+          <Route path="/TEST" element={<EditableTable/>}/>
         </Routes>
       </BrowserRouter>
     </div>

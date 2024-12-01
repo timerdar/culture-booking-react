@@ -3,6 +3,8 @@ function Seat({row, index, onSeatClick}) {
         <td 
         onClick={() => onSeatClick(row, index)}
         className="seat"
+        data-row={row}
+        data-index={index}
         ><div class="tooltip">Ряд: {row}, Место: {index}</div></td>
     
 
@@ -47,7 +49,7 @@ function SecondType({ row, onSeatClick}){
             }else{
                 key = i - 18;
             }
-            seats.push(<Seat key={i} index={key} row={row} onClick={onSeatClick}/>);
+            seats.push(<Seat key={i} index={key} row={row} onSeatClick={onSeatClick}/>);
         } else {
             seats.push(<NonSeat key={i}/>);
         }
@@ -73,7 +75,7 @@ function ThirdType({ row, onSeatClick}){
             }else{
                 key = i - 2;
             }
-            seats.push(<Seat key={i} index={key} row={row} onClick={onSeatClick}/>);
+            seats.push(<Seat key={i} index={key} row={row} onSeatClick={onSeatClick}/>);
         }
     }
     return (
@@ -97,7 +99,7 @@ function FourthType({ row, onSeatClick}){
             }else{
                 key = i - 2;
             }
-            seats.push(<Seat key={i} index={key} row={row} onClick={onSeatClick}/>);
+            seats.push(<Seat key={i} index={key} row={row} onSeatClick={onSeatClick}/>);
         }
     }
     return (
@@ -119,7 +121,7 @@ function FifthType({ row, onSeatClick}){
             }else{
                 key = i - 5;
             }
-            seats.push(<Seat  key={i} index={key} row={row} onClick={onSeatClick}/>);
+            seats.push(<Seat  key={i} index={key} row={row} onSeatClick={onSeatClick}/>);
         } else {
             seats.push(<NonSeat key={i}/>);
         }
@@ -143,7 +145,7 @@ function SixthType({ row, onSeatClick}){
             }else{
                 key = i - 2;
             }
-            seats.push(<Seat key={i} index={key} row={row} onClick={onSeatClick}/>);
+            seats.push(<Seat key={i} index={key} row={row} onSeatClick={onSeatClick}/>);
         } else {
             seats.push(<NonSeat key={i}/>);
         }

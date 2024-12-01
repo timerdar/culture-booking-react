@@ -309,7 +309,7 @@ html, body {
 }
 
 
-/* EVENT ADD */
+/* EVENT ADD
 
 .create-event-container{
     display: flex;
@@ -318,9 +318,9 @@ html, body {
 
 .create-event-container .seats-container{
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
-    width: 1000px;
+    scale: 80%;
     padding: 40px;
     transform: translate(0, -60%);
     display: flex;
@@ -336,12 +336,122 @@ html, body {
 .create-event-container .form-container{
     position: absolute;
     top: 50%;
-    left: 25%;
     width: 600px;
+    scale: 80%;
     padding: 40px;
-    transform: translate(-50%, -50%);
+    transform: translate(0, -70%);
     background: rgba(0, 255, 136, 0.5);
     box-sizing: border-box;
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
     border-radius: 10px;
 }
+
+.create-event-container .categories-container{
+    position: absolute;
+    left: 25%;
+    width: 500px;
+    padding: 40px;
+    transform: translate(0, 0);
+    background: rgb(168, 214, 130);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+}
+     */
+
+     .create-event-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around; /* Распределяет элементы */
+        align-items: flex-start; /* Выровнено по верхнему краю */
+        padding: 20px;
+        flex-wrap: wrap; /* Позволяет переносить элементы на новые строки */
+        gap: 20px;
+    }
+    
+    .create-event-container .seats-container {
+        position: relative;
+        width: 60%; /* Используйте относительные размеры для адаптивности */
+        padding: 20px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        border-radius: 30px;
+        background: #f8f8f8;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .create-event-container .seats-container h1 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        text-align: center;
+        color: #333;
+        display: none; /* Если нужно скрыть заголовок */
+    }
+    
+    .create-event-container .form-container {
+        width: 400px;
+        padding: 20px;
+        background: rgba(0, 255, 136, 0.2);
+        box-sizing: border-box;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        margin: 0 auto;
+    }
+    
+    .create-event-container .form-container h1 {
+        font-size: 24px;
+        color: #000;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    
+    .create-event-container .categories-container {
+        width: 400px;
+        padding: 20px;
+        background: rgb(168, 214, 130);
+        box-sizing: border-box;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        margin: 0 auto;
+    }
+    
+    .create-event-container .categories-container table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+    }
+    
+    .create-event-container .categories-container th,
+    .create-event-container .categories-container td {
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+    
+    .create-event-container .categories-container th {
+        background: #ddd;
+    }
+    
+    .create-event-container .form-container input,
+    .create-event-container .form-container textarea,
+    .create-event-container .form-container button {
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+    
+    .create-event-container .form-container button {
+        background-color: #4caf50;
+        color: white;
+        cursor: pointer;
+        border: none;
+    }
+    
+    .create-event-container .form-container button:hover {
+        background-color: #45a049;
+    }

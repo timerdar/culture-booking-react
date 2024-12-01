@@ -9,7 +9,7 @@ function SelectSeat(){
 
     document.title = 'Выбор места'
 
-    const handelSeatClick = (index, row) => {
+    const handelSeatClick = (row, index) => {
 
         createTicket(parseInt(visitor_id.userId), parseInt(event_id.id), `${index}-${row}`)
     }

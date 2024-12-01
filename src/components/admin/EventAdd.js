@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../../App.css';
 import SeatsPicker from "../seatsLogic/SeatsPicker";
+import CategoriesTable from "../seatsLogic/CategoriesTable";
 
 function EventAdd(){
 
@@ -11,9 +12,18 @@ function EventAdd(){
     const [eventDate, setEventDate] = useState('')
     const [seats, setSeats] = useState('')
     const [id, setId] = useState(0)
-    const [groups, setGroups] = useState([])
+    const [groups, setGroups] = useState([]);
+    const [selectedColor, setSelectedColor] = useState();
+    let commitedSeats = [];
 
     document.title = 'Создание мероприятия'
+
+    const handelSeatClick = (row, index) => {
+        //console.log(`Место ${row} ${index}`)
+        const cell = document.querySelector(`[data-row="${row}"][data-index="${index}"]`);
+        groups.map((group) => {if(group.color === selectedColor) group.totalSeats++});
+        cell.style.backgroundColor = selectedColor;
+    }
 
     function addEventToApi(name, description, eventDate, seats){
         fetch("/api/events", {
@@ -95,8 +105,8 @@ function EventAdd(){
                     Добавить
                 </button>
             </form>
-            
-            <SeatsPicker/>
+            <CategoriesTable setGroupsArray={setGroups} setSelectedColor={setSelectedColor} groupsArray={groups}/>
+            <SeatsPicker handelSeatClick={handelSeatClick}/>
         </div>
             
     )
