@@ -15,6 +15,21 @@ class Utils{
 
         return `${formattedDate} ${formattedTime}`
     }
+
+    static rgbStringToHex(rgb) {
+        // Парсим строку формата 'rgb(r, g, b)'
+        const match = rgb.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+        if (!match) {
+            throw new Error('Invalid RGB format');
+        }
+    
+        // Извлекаем компоненты R, G, B
+        const [, r, g, b] = match.map(Number);
+    
+        // Преобразуем RGB в HEX
+        const toHex = (component) => component.toString(16).padStart(2, '0');
+        return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+    }
 }
 
 export default Utils;

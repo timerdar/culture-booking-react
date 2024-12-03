@@ -1,20 +1,19 @@
 import { useState } from "react";
 
-function CategoriesTable({groupsArray, setGroupsArray, setSelectedColor}){
-
-    const [newRow, setNewRow] = useState({ color: "#000000", name: "" });
-
+function CategoriesTable({groupsArray, setGroupsArray, setSelectedColor, selectedColor}){
+    
+    const [newRow, setNewRow] = useState({ color: "#000000", name: "", seatsArray:[]});
     const addRow = () => {
-      setGroupsArray((prevRows) => [
+            setGroupsArray((prevRows) => [
         ...prevRows,
-        { color: newRow.color, name: newRow.name, totalSeats: 0 },
+        { color: newRow.color, name: newRow.name, seatsArray: [] },
       ]);
-      setNewRow({ color: "", name: "" }); // Очистить форму
+      setNewRow({ color: "", name: "", totalSeats: 0, seatsArray:[]});
     };
 
     return(
         <div class="categories-container">
-            <table class="categories-table" id="categories-table" style={{border: "solid"}}>
+            <table class="categories-table" id="categories-table" >
                 <thead>
                     <tr>
                         <td>Цвет</td>
@@ -26,15 +25,15 @@ function CategoriesTable({groupsArray, setGroupsArray, setSelectedColor}){
                     {groupsArray.map((row, index) => (
                         <tr key={index} >
                             <td style={{ backgroundColor: row.color}}></td>
-                            <td onClick={() => setSelectedColor(row.color)}>{row.name}</td>
-                            <td>{row.totalSeats}</td>
+                            <td style={{fontWeight: (row.color === selectedColor?"bold":"normal")}} onClick={() => {setSelectedColor(row.color);
+                            }}>{row.name}</td>
+                            <td>{row.seatsArray.length}</td>
                         </tr>
                     ))}
                     <tr>
                         <td>
                             <input
                             type="color"
-                            value={newRow.color}
                             onChange={(e) =>
                             setNewRow((prev) => ({ ...prev, color: e.target.value }))
                             }

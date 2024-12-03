@@ -1,10 +1,11 @@
-function Seat({row, index, onSeatClick}) {
+function Seat({row, index, onSeatClick, category}) {
     return (
         <td 
         onClick={() => onSeatClick(row, index)}
         className="seat"
         data-row={row}
         data-index={index}
+        category={category}
         ><div class="tooltip">Ряд: {row}, Место: {index}</div></td>
     
 

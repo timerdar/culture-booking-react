@@ -3,29 +3,47 @@ import { useNavigate } from "react-router-dom";
 import '../../App.css';
 import SeatsPicker from "../seatsLogic/SeatsPicker";
 import CategoriesTable from "../seatsLogic/CategoriesTable";
+import Utils from "../../Utils";
 
 function EventAdd(){
 
-    const { navigate } = useNavigate();
+    const navigate = useNavigate();
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [eventDate, setEventDate] = useState('')
-    const [seats, setSeats] = useState('')
-    const [id, setId] = useState(0)
     const [groups, setGroups] = useState([]);
-    const [selectedColor, setSelectedColor] = useState();
-    let commitedSeats = [];
+    const [selectedColor, setSelectedColor] = useState('');
+    var prevColor = ''
 
     document.title = 'Создание мероприятия'
 
     const handelSeatClick = (row, index) => {
-        //console.log(`Место ${row} ${index}`)
         const cell = document.querySelector(`[data-row="${row}"][data-index="${index}"]`);
-        groups.map((group) => {if(group.color === selectedColor) group.totalSeats++});
-        cell.style.backgroundColor = selectedColor;
+        if (selectedColor !== ''){
+            prevColor = (cell.style.backgroundColor === ""?'#949494':Utils.rgbStringToHex(cell.style.backgroundColor));
+
+            const s = groups;
+            if (selectedColor !== prevColor){
+                s.foreach((group) => {
+                    if (group.color === prevColor){
+                        let item_index = group.seatsArray.indexOf(`${row}-${index}`)
+                        console.log(item_index, group.seatsArray[item_index]);
+                        
+                        if (item_index > -1){
+                            group.seatsArray.splice(item_index, 1);
+                        }
+                    }else if(group.color === selectedColor){
+                        group.seatsArray.push(`${row}-${index}`)
+                    }
+                })
+            }
+            setGroups(s);
+            cell.style.backgroundColor = selectedColor;
+        }
+        
     }
 
-    function addEventToApi(name, description, eventDate, seats){
+    function addEventToApi(name, description, eventDate, groups){
         fetch("/api/events", {
             method: 'POST',
             headers: {
@@ -36,8 +54,7 @@ function EventAdd(){
                 'name':name,
                 'description':description,
                 'eventDate':eventDate,
-                'seats':
-                    {seats}
+                'seats': groups
                 })
         })
         .then((response) => {
@@ -47,8 +64,7 @@ function EventAdd(){
             return response.json();
         })
         .then((data) => {
-            console.log('Event created: ', data);
-            setId(data.id);
+            alert(`Мероприятие "${data.name}" создано`)
             navigate(`/events`);
         })
         .catch((err) => {
@@ -58,8 +74,30 @@ function EventAdd(){
 
     function handleSubmit(event){
         event.preventDefault();
-        console.log(description)
-        //addEventToApi(name, description, eventDate, seats);
+        var formattedGroups = [];
+        groups.foreach((group) => {
+            var seats = [];
+            group.seatsArray.foreach((seat) => {
+                seats.push({
+                    seat: `${seat}`,
+                    status: 'свободно'
+                })
+            })
+            if (seats.length !== 0){
+                formattedGroups.push(
+                    {
+                        "name": group.name,
+                        "color": group.color,
+                        "seats" : seats
+                    }
+                )
+            }
+        })
+        if(formattedGroups.length === 0){
+            alert("Добавьте хотя бы одну группу");
+        }else{
+            addEventToApi(name, description, eventDate, formattedGroups);
+        }
     }
 
     return (
@@ -105,8 +143,10 @@ function EventAdd(){
                     Добавить
                 </button>
             </form>
-            <CategoriesTable setGroupsArray={setGroups} setSelectedColor={setSelectedColor} groupsArray={groups}/>
-            <SeatsPicker handelSeatClick={handelSeatClick}/>
+            <div className="column1">
+                <CategoriesTable setGroupsArray={setGroups} setSelectedColor={setSelectedColor} selectedColor={selectedColor} groupsArray={groups}/>
+                <SeatsPicker handelSeatClick={handelSeatClick}/>
+            </div>
         </div>
             
     )
