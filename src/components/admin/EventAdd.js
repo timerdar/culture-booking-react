@@ -24,7 +24,7 @@ function EventAdd(){
 
             const s = groups;
             if (selectedColor !== prevColor){
-                s.foreach((group) => {
+                s.forEach((group) => {
                     if (group.color === prevColor){
                         let item_index = group.seatsArray.indexOf(`${row}-${index}`)
                         console.log(item_index, group.seatsArray[item_index]);
@@ -75,9 +75,9 @@ function EventAdd(){
     function handleSubmit(event){
         event.preventDefault();
         var formattedGroups = [];
-        groups.foreach((group) => {
+        groups.forEach((group) => {
             var seats = [];
-            group.seatsArray.foreach((seat) => {
+            group.seatsArray.forEach((seat) => {
                 seats.push({
                     seat: `${seat}`,
                     status: 'свободно'
@@ -101,7 +101,12 @@ function EventAdd(){
     }
 
     return (
+        
         <div class="create-event-container">
+            <div class="column1">
+                <SeatsPicker handelSeatClick={handelSeatClick}/>
+                <CategoriesTable setGroupsArray={setGroups} setSelectedColor={setSelectedColor} selectedColor={selectedColor} groupsArray={groups}/>
+            </div>
             <form class="form-container" onSubmit={handleSubmit}>
                 <h1>Создание мероприятия</h1>
                 <div class="col-input">
@@ -143,10 +148,6 @@ function EventAdd(){
                     Добавить
                 </button>
             </form>
-            <div className="column1">
-                <CategoriesTable setGroupsArray={setGroups} setSelectedColor={setSelectedColor} selectedColor={selectedColor} groupsArray={groups}/>
-                <SeatsPicker handelSeatClick={handelSeatClick}/>
-            </div>
         </div>
             
     )

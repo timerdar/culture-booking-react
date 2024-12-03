@@ -320,7 +320,7 @@ html, body {
 .create-event-container .seats-container{
     position: absolute;
     top: 40%;
-    left: 50%;
+    left: 30%;
     scale: 80%;
     padding: 40px;
     transform: translate(0, -60%);
@@ -334,9 +334,13 @@ html, body {
     visibility: hidden;
 }
 
+.create-event-container .column1{
+    overflow-x:scroll;
+}
+
 .create-event-container .form-container{
     position: absolute;
-    top: 50%;
+    top: 40%;
     width: 600px;
     scale: 80%;
     padding: 40px;
@@ -349,10 +353,10 @@ html, body {
 
 .create-event-container .categories-container{
     position: absolute;
-    left: 25%;
     width: 500px;
     padding: 40px;
-    transform: translate(0, 0);
+    top: 75%;
+    transform: translate(10%, 0);
     background: rgb(168, 214, 130);
     box-sizing: border-box;
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
