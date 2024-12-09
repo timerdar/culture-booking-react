@@ -40,7 +40,7 @@ function VisitorAdd(){
         .then((data) => {
             setUserId(data.id);
             console.log(data);
-            navigate(`/events/${id}/seats`, {state: {userId: data.id}});
+            navigate(`/events/${id}/seats`, {state: {user: data}});
         })
     }
 

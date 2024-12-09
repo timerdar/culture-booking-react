@@ -173,7 +173,7 @@ function SeatsPicker({handelSeatClick}) {
     return (
         <div class="seats-container">
             <h1>Выбор места</h1>
-            <table class="seats-table">
+            <table class="seats-table" id="seats-table">
                 <thead></thead>
                 <tbody>
                     <Empty text={"СЦЕНА"}/>

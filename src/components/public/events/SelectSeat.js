@@ -1,17 +1,55 @@
+import { useEffect, useState } from "react";
 import SeatsPicker from "../../seatsLogic/SeatsPicker";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import Utils from "../../../Utils";
 
 function SelectSeat(){
     const location = useLocation();
-    const visitor_id = location.state;
+    const visitor = location.state;
     const event_id = useParams();
     const navigate = useNavigate();
-
+    
     document.title = 'Выбор места'
 
-    const handelSeatClick = (row, index) => {
 
-        createTicket(parseInt(visitor_id.userId), parseInt(event_id.id), `${index}-${row}`)
+
+    function seatsFilter(input_category){
+        
+
+        fetch(`/api/events/${event_id.id}/seats?`+ new URLSearchParams({
+                sector: input_category
+                }))
+                .then((response) => {
+                    if (!response.ok){
+                        throw new Error(`Server error: ${response.st}`)    
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    data.forEach(sector => {
+                        let color = sector.color;
+                        sector.seats.forEach(seat => {
+                            let seat_row = seat.seat.split('-')[0]
+                            let seat_index = seat.seat.split('-')[1]
+                            let cell = document.querySelector('td[data-row="' + seat_row + '"][data-index="' + seat_index + '"]')
+                            if (seat.status === "свободно"){
+                                cell.style.backgroundColor = color;                            
+                            }
+                        })
+                    });
+
+                })
+                .catch((err) => {
+                    Error(err);
+                });
+    };
+
+    seatsFilter(visitor.user.category);
+    //seatsFilter("all")
+
+    
+    const handelSeatClick = (row, index) => {
+        createTicket(parseInt(visitor.user.id), parseInt(event_id.id), `${row}-${index}`)
     }
 
     function createTicket(visitor_id, event_id, seat){
